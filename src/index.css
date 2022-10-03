@@ -1,6 +1,11 @@
 .nav{
   background-color: #7a90ad;
 }
+.nav2{
+  background-color: #7a90ad;
+  display: flex;
+  justify-content:flex-start;
+}
 .pull-right{
   display: flex;
   justify-content: flex-end;
@@ -20,7 +25,26 @@ width: 30em;
 height: 25em;
 position: relative;
 border-radius: 1em;
-box-sizing: border-box;
-padding: 10px;
-margin-top: 25px;
+padding: 40px;
+margin-top: 35px;
+}
+.marginleft{
+  margin-left: 10px;
+}
+.centerself{
+  display: flex;
+  justify-content: center;
+}
+.margintop{
+  margin-top: 10px;
+}
+.marginbottom{
+  margin-bottom: 20px;
+}
+.marginlefttop{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.width-full{
+  width: 100%;
 }
