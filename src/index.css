@@ -48,3 +48,9 @@ margin-top: 35px;
 .width-full{
   width: 100%;
 }
+.errmsg{
+  color: red;
+  display: flex;
+  justify-content: center;
+
+}
