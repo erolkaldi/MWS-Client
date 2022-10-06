@@ -7,14 +7,16 @@ import AuthContext from "../../Context/AuthContext";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [email = "", setEmail] = useState();
+  
   const [password = "", setPassword] = useState();
   const [remember = false, setRemember] = useState();
-  const [errMsg, setErrMsg] = useState();
-  const { setAuth } = useContext(AuthContext);
+  const [errMsg, setErrMsg] = useState(); 
+  const { auth,setAuth } = useContext(AuthContext);
+  const [email = auth.email, setEmail] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  
   useEffect(() => {
     if (userRef.current) {
       userRef.current.focus();

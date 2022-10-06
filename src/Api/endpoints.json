@@ -1,3 +1,4 @@
 {
-    "login":"token"
+    "login":"token",
+    "register":"identity/account/registeruser"
 }

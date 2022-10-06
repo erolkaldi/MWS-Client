@@ -28,6 +28,15 @@ border-radius: 1em;
 padding: 40px;
 margin-top: 35px;
 }
+.register-container{
+  background-color: aliceblue;
+width: 30em;
+height: 35em;
+position: relative;
+border-radius: 1em;
+padding: 40px;
+margin-top: 35px;
+}
 .marginleft{
   margin-left: 10px;
 }
