@@ -91,6 +91,7 @@ const Register = () => {
         onChange={(e) => setName(e.target.value)}
         value={name}
         required
+        maxLength="20"
       />
       <Label className="marginleft">Full Name</Label>
       <Input
@@ -132,7 +133,9 @@ const Register = () => {
       >
         Register
       </Button>
-      
+      <span className="margintop">
+          <a href="/login">Allready have an account? Login here</a>
+        </span>
     </div>
   </Container>
     );

@@ -1,4 +1,5 @@
 {
     "login":"token",
-    "register":"identity/account/registeruser"
+    "register":"identity/account/registeruser",
+    "createCompany":"company/company/createCompany"
 }

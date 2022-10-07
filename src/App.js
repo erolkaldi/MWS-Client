@@ -11,6 +11,7 @@ import { useContext } from "react";
 import Layout from "./Components/Shared/Layout";
 import NotFound from "./Components/Shared/NotFound";
 import RequireAuth from "./Components/Shared/RequireAuth";
+import CreateCompany from "./Components/Company/CreateCompany/CreateCompany";
 function App() {
   const { auth, setAuth } = useContext(AuthContext);
   const doLogout = () => {
@@ -24,13 +25,6 @@ function App() {
           <h3>MWS App</h3>
         </Col>
         <Col xs="6" className="pull-right">
-          <Link
-            to="/login"
-            className="btn btn-primary"
-            hidden={auth.isLoggedIn}
-          >
-            Login
-          </Link>
           <Link
             to="/login"
             className="btn btn-danger"
@@ -50,6 +44,7 @@ function App() {
             <Route element={<RequireAuth />}>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/createcompany" element={<CreateCompany />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
