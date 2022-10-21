@@ -5,10 +5,10 @@ import endpoints from "../../Api/endpoints.json";
 import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 const Home = () => {
-  const userRef = useRef();
   const errRef = useRef();
 
   const [errMsg, setErrMsg] = useState();
+  const [selectedCompany,setCompany]=useState('');
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -39,13 +39,48 @@ const Home = () => {
       errRef.current.focus();
     }
   };
-  const goToCreate = () => {
+  const [companies,setCompanies]=useState([]);
+useEffect( ()=>{
+  async function fetchData(){
+    const resp = await axios.get(
+      endpoints.getCompanies,
+      {
+        headers: { "Content-Type": "application/json","Authorization":"Bearer "+auth.token },
+        withCredentials: false,
+      }
+    );
+    setCompanies([...resp.data.data]);
+  }
     
+      fetchData();
+  },[auth.token]);
+  const goToCreate = (e) => {
+    if (e) {
+      e.preventDefault();
+    }
     navigate("createcompany");
   };
   return (
     <Container className="center">
-      <div className="login-container">
+      <div className="login-container" hidden={auth.companyId===""}>
+    <Label for="exampleSelect">
+      Company
+    </Label>
+    <Input
+      id="companySelect"
+      name="companySelect"
+      type="select"
+      value={selectedCompany}
+      onChange={(e)=> setCompany(e.target.value)}
+      
+    >
+      {
+        companies.length>0 ? 
+        companies.map(opt=><option value={opt.id} key={opt.id}>{opt.name}</option>)
+        : <option></option>
+      }
+      
+    </Input>
         <Button
           name="request"
           id="request"
