@@ -57,6 +57,7 @@ const Login = () => {
           token: resp.data.accessToken,
           isLoggedIn: true,
           email: email,
+          companyId:resp.data.companyId
         });
         navigate(from);
       } else {

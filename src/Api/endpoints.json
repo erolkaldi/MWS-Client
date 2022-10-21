@@ -1,5 +1,6 @@
 {
     "login":"token",
     "register":"identity/account/registeruser",
-    "createCompany":"company/company/createCompany"
+    "createCompany":"company/company/createCompany",
+    "getCompanies":"company/company/getCompanies"
 }
