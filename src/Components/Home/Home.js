@@ -9,6 +9,7 @@ const Home = () => {
 
   const [errMsg, setErrMsg] = useState();
   const [selectedCompany,setCompany]=useState('');
+  const [companyName,setCompanyName]=useState('');
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const Home = () => {
       e.preventDefault();
     }
     try {
-      const resp = await axios.post(endpoints.login, JSON.stringify({}), {
+      const resp = await axios.post(endpoints.identitiy.sendCompanyJoin, JSON.stringify({companyId:selectedCompany}), {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + auth.token,
@@ -25,8 +26,23 @@ const Home = () => {
         withCredentials: false,
       });
       if (resp.data.success) {
+        setAuth({token: auth.token,
+          isLoggedIn: true,
+          email: auth.email,
+          companyId:selectedCompany});
+          
       } else {
         setErrMsg(resp.data.message);
+      }
+      const resp2 = await axios.post(endpoints.company.updateUserCompany, JSON.stringify({companyId:selectedCompany}), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token,
+        },
+        withCredentials: false,
+      });
+      if(resp2.data.responseType===0){
+        setAuth({ isLoggedIn: false });
       }
     } catch (err) {
       if (err?.response) {
@@ -40,20 +56,32 @@ const Home = () => {
     }
   };
   const [companies,setCompanies]=useState([]);
+  
 useEffect( ()=>{
   async function fetchData(){
     const resp = await axios.get(
-      endpoints.getCompanies,
+      endpoints.company.getCompanies,
       {
         headers: { "Content-Type": "application/json","Authorization":"Bearer "+auth.token },
         withCredentials: false,
       }
     );
     setCompanies([...resp.data.data]);
+    if(resp.data.data.length>0){
+      if(auth.companyId!==''){
+        const comp =resp.data.data.filter(function(x){return x.id===auth.companyId})
+        setCompanyName(comp[0].name);
+      }
+      else{
+        setCompany(resp.data.data[0].id);
+      }
+
+    }
+    
   }
     
       fetchData();
-  },[auth.token]);
+  },[auth.token,auth.companyId]);
   const goToCreate = (e) => {
     if (e) {
       e.preventDefault();
@@ -62,7 +90,7 @@ useEffect( ()=>{
   };
   return (
     <Container className="center">
-      <div className="login-container" hidden={auth.companyId===""}>
+      <div className="login-container" hidden={auth.companyId!==""}>
     <Label for="exampleSelect">
       Company
     </Label>
@@ -97,6 +125,9 @@ useEffect( ()=>{
         >
           Or create your own company
         </Button>
+      </div>
+      <div className="login-container" hidden={auth.companyId===""}>
+<h2>Wellcome to {companyName}</h2>
       </div>
     </Container>
   );

@@ -45,7 +45,7 @@ const Login = () => {
         return;
       }
       const resp = await axios.post(
-        endpoints.login,
+        endpoints.identitiy.login,
         JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },
@@ -57,7 +57,8 @@ const Login = () => {
           token: resp.data.accessToken,
           isLoggedIn: true,
           email: email,
-          companyId:resp.data.companyId
+          companyId:resp.data.companyId,
+          roles:resp.data.roles
         });
         navigate(from);
       } else {

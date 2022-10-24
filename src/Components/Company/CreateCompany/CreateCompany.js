@@ -26,7 +26,7 @@ const CreateCompany = () => {
       }
       
       const resp = await axios.post(
-        endpoints.createCompany,
+        endpoints.company.createCompany,
         JSON.stringify({ email,name }),
         {
           headers: { "Content-Type": "application/json","Authorization":"Bearer "+auth.token },

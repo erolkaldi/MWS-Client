@@ -1,6 +1,10 @@
 {
+    "identitiy":{
     "login":"token",
     "register":"identity/account/registeruser",
-    "createCompany":"company/company/createCompany",
-    "getCompanies":"company/company/getCompanies"
+    "sendCompanyJoin":"identity/account/userJoinCompany"
+    },
+    "company":{"createCompany":"company/company/createCompany",
+    "getCompanies":"company/company/getCompanies",
+    "updateUserCompany":"company/company/updateUserCompany"}
 }
